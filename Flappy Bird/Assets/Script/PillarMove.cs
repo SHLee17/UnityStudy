@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PillarMove : MonoBehaviour
 {
+    float speed = 10;
 
     void Start()
     {
@@ -14,7 +15,6 @@ public class PillarMove : MonoBehaviour
     {
         
     }
-    float speed = 10;
     private void FixedUpdate()
     {
         speed = Time.deltaTime * 5;

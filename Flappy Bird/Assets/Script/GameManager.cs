@@ -19,20 +19,31 @@ public class GameManager : MonoBehaviour
             text.text = Score.ToString();
         }
     }
-
     void Start()
     {
-        Score = 0;
-        InvokeRepeating("CreateObjects", 1, 2);
+        
+        //InvokeRepeating("CreateObjects", 1, 2);
+
+        StartCoroutine(MyCoroutine());
+        SingletonManager.Instance.SetScore(10);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
-    void CreateObjects()
+
+    IEnumerator MyCoroutine()
     {
-        Instantiate(obj, new Vector3(7.5f, Random.Range(-2, 2.1f), 0), Quaternion.identity);
+        while (true)
+        {
+            yield return new WaitForSeconds(2.0f);
+
+            Instantiate(obj, new Vector3(7.5f, Random.Range(-2, 2.1f), 0), Quaternion.identity);
+        }
     }
+    //void CreateObjects()
+    //{
+    //    Instantiate(obj, new Vector3(7.5f, Random.Range(-2, 2.1f), 0), Quaternion.identity);
+    //}
 }
