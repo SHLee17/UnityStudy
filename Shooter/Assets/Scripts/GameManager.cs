@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public ObjectManager objManager;
     public List<Spawn> spawnList;
 
+    public List<Flight> flightList;
+
     int spawnIndex = 0;
     bool spawnEnd;
 
@@ -79,66 +81,90 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        ReadSpawnFile();
+        //ReadSpawnFile();
+        nextEnemySpawnDelay = 0;
+        spawnEnd = false;
     }
-
+   
     private void Update()
     {
-        ReSpawnEnemy();
-    }
-
-    public void ReSpawnEnemy()
-    {
         currentTime += Time.deltaTime;
-
         if (currentTime > nextEnemySpawnDelay && !spawnEnd)
         {
-            int pos = spawnList[spawnIndex].point;
+            Flight temp = Instantiate(flightList[0]);
 
+            temp.transform.position = objSpawnPos[1].transform.position;
+            temp.SetPlayer(player.gameObject);
+            temp.Attack();
+            temp.Move();
 
-            Enemy tempEnemy = null;
-            tempEnemy = objManager.MakeObject(spawnList[spawnIndex].type).GetComponent<Enemy>();
-
-            if (tempEnemy != null)
-            {
-                tempEnemy.gm = this;
-                tempEnemy.rb.velocity = new Vector2(0, enemy[0].speed * -1);
-                tempEnemy.transform.position = objSpawnPos[pos].position;
-
-                if (!(tempEnemy is Boss))
-                {
-                    StartCoroutine(tempEnemy.FireBullet());
-                    tempEnemy.player = player.gameObject;
-                }
-                else
-                {
-                    Boss temp = tempEnemy as Boss;
-                    StartCoroutine(temp.Stop(2));
-
-                }
-            }
-            //else if(tempBoss != null)
+            //if (temp is TriangleFlight)
             //{
-            //    tempBoss.gm = this;
-            //    tempBoss.transform.position = objSpawnPos[pos].position;
+            //    TriangleFlight temp2 = temp as TriangleFlight;
+
+            //    temp2.transform.position = objSpawnPos[1].transform.position;
+            //    temp2.SetPlayer(player.gameObject);
+            //    temp2.Attack();
+            //    temp2.Move();
 
             //}
 
-            spawnIndex++;
-
-
-            if (spawnIndex == spawnList.Count)
-            {
-                spawnEnd = true;
-                return;
-            }
-
-            nextEnemySpawnDelay = spawnList[spawnIndex].delay;
+            //nextEnemySpawnDelay = spawnList[spawnIndex].delay;
             currentTime = 0;
+            spawnEnd = true;
         }
+
+        #region Respawn Enemy
+        //if (spawnList.Count <= 0) return;
+        
+        //currentTime += Time.deltaTime;
+
+        //if (currentTime > nextEnemySpawnDelay && !spawnEnd)
+        //{
+        //    int pos = spawnList[spawnIndex].point;
+
+
+        //    Enemy tempEnemy = null;
+        //    tempEnemy = objManager.MakeObject(spawnList[spawnIndex].type).GetComponent<Enemy>();
+
+        //    if (tempEnemy != null)
+        //    {
+        //        tempEnemy.gm = this;
+        //        tempEnemy.rb.velocity = new Vector2(0, enemy[0].speed * -1);
+        //        tempEnemy.transform.position = objSpawnPos[pos].position;
+
+        //        if (!(tempEnemy is Boss))
+        //        {
+        //            StartCoroutine(tempEnemy.FireBullet());
+        //            tempEnemy.player = player.gameObject;
+        //        }
+        //        else
+        //        {
+        //            Boss temp = tempEnemy as Boss;
+        //            StartCoroutine(temp.Stop(2));
+        //        }
+        //    }
+
+        //    spawnIndex++;
+
+
+        //    if (spawnIndex == spawnList.Count)
+        //    {
+        //        spawnEnd = true;
+        //        return;
+        //    }
+
+        //    nextEnemySpawnDelay = spawnList[spawnIndex].delay;
+        //    currentTime = 0;
+        //}
+        #endregion
     }
 
-    public void ReSpawnPlayer()
+    public void RespawnFlight()
+    {
+
+    }
+    public void RespawnPlayer()
     {
         StartCoroutine(AlivePlayer());
     }

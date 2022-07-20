@@ -3271,6 +3271,9 @@ MonoBehaviour:
   txtScore: {fileID: 929625654}
   objManager: {fileID: 2115288669}
   spawnList: []
+  flightList:
+  - {fileID: -7331670410289533638, guid: b8255aad36ae10a4cad27f2813ce4de0, type: 3}
+  - {fileID: 749333738335450804, guid: ea401e64ea931b54abfe952471560c93, type: 3}
 --- !u!4 &1620166867
 Transform:
   m_ObjectHideFlags: 0
@@ -4108,6 +4111,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2087419015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087419017}
+  - component: {fileID: 2087419016}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2087419016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087419015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1177f0a2762cd2a45ab23eae1a306fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oneShotBullet: {fileID: 2862947716780065269, guid: 0ae1865a2cd101d4c817b513c56c4f2c, type: 3}
+  doubleShotBullet: {fileID: 2865252313441583456, guid: 1eb8391eab582414985847f23ff50777, type: 3}
+--- !u!4 &2087419017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087419015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115288667
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,6 +4261,10 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 1620166866}
+    - target: {fileID: 5912006943964710264, guid: 67e1907471c0b384896f799f24435042, type: 3}
+      propertyPath: wm
+      value: 
+      objectReference: {fileID: 2087419016}
     - target: {fileID: 5912006943964710264, guid: 67e1907471c0b384896f799f24435042, type: 3}
       propertyPath: maxBulletDelay
       value: 0

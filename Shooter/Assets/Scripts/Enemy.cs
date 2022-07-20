@@ -83,4 +83,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    private void OnDisable()
+    {
+        StopCoroutine(FireBullet());   
+    }
 }

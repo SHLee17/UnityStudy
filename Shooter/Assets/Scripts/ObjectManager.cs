@@ -29,6 +29,7 @@ public class ObjectManager : MonoBehaviour
 
     void Start()
     {
+        return;
         objEnemyB = new GameObject[10];
         objEnemyA = new GameObject[10];
         objPlayerBullet = new GameObject[100];

@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     bool isControl;
     public bool isHit;
 
+    public WeaponManager wm;
+
 
     void Start()
     {
@@ -85,6 +87,12 @@ public class Player : MonoBehaviour
         #endregion
 
         #region Fire
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            wm.ChangeToBullet(WeaponType.OneShot);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            wm.ChangeToBullet(WeaponType.DoubleShot);
+
         if (Input.GetButton("Fire1"))
         {
             currentBulletDelay += Time.deltaTime;
@@ -92,9 +100,11 @@ public class Player : MonoBehaviour
             if (currentBulletDelay < maxBulletDelay)
                 return;
 
-            Bullet tempBullet = gm.objManager.MakeObject("PlayerBullet").GetComponent<Bullet>();
-            tempBullet.transform.position = transform.position;
-            tempBullet.rb.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+            wm.Fire(gameObject);
+            //GameObject tempBullet = wm
+            //Bullet tempBullet = gm.objManager.MakeObject("PlayerBullet").GetComponent<Bullet>();
+            //tempBullet.transform.position = transform.position;
+            //tempBullet.rb.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
             currentBulletDelay = 0;
             maxBulletDelay = 0.2f;
 
@@ -147,7 +157,7 @@ public class Player : MonoBehaviour
                 life--;
 
                 if (life > 0)
-                    gm.ReSpawnPlayer();
+                    gm.RespawnPlayer();
                 else
                     gm.GameOver();
 
